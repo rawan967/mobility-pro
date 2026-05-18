@@ -21,6 +21,462 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh; 
+            margin: 0;
+            color: #FFFFFF;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden; 
+        }
+
+        .phone-container {
+            width: 340px;
+            height: 680px; 
+            background: linear-gradient(180deg, var(--purple-main) 0%, var(--purple-dark) 100%);
+            border: 12px solid #1C1C1E;
+            border-radius: 40px;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        /* Top Bar Notch Simulator */
+        .phone-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 20px;
+            background-color: #1C1C1E;
+            border-bottom-left-radius: 14px;
+            border-bottom-right-radius: 14px;
+            z-index: 999;
+        }
+
+        /* DYNAMIC PUSH NOTIFICATIONS SYSTEM */
+        .push-notification {
+            position: absolute;
+            top: -90px;
+            left: 10px;
+            width: 320px;
+            background: rgba(28, 28, 30, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 12px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 1000;
+            transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+        }
+        .push-notification.show { top: 30px; }
+        
+        .push-icon-cash {
+            width: 32px; height: 32px; background: #00C853;
+            border-radius: 8px; display: flex; justify-content: center; align-items: center;
+            font-size: 16px;
+        }
+        .push-icon-penalty {
+            width: 32px; height: 32px; background: var(--neon-red);
+            border-radius: 8px; display: flex; justify-content: center; align-items: center;
+            font-size: 16px;
+        }
+
+        /* APP BRANDING HEADER */
+        .app-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            padding: 30px 20px 10px 20px; 
+            box-sizing: border-box;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        .client-logo img { height: 60px; width: auto; object-fit: contain; }
+        .campaign-logo img {
+            width: 100px; height: 100px; border-radius: 50%;
+            object-fit: cover; border: 2px solid var(--neon-green);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+        }
+
+        .team-tagline {
+            font-size: 9px; color: rgba(255, 255, 255, 0.4); 
+            text-align: center; width: 100%; letter-spacing: 0.5px;
+            text-transform: uppercase; padding-bottom: 8px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        /* Screens framework */
+        .screen {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between; 
+            flex-grow: 1;
+            text-align: center;
+            box-sizing: border-box;
+            height: calc(100% - 90px);
+        }
+
+        .hidden { display: none !important; }
+        .screen-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        /* SCREEN 1: Scan / Selection UI */
+        .scan-box {
+            width: 150px; height: 150px;
+            border: 2px dashed rgba(57, 255, 20, 0.4);
+            border-radius: 24px; margin: 15px 0; position: relative;
+            background: rgba(0, 0, 0, 0.2); display: flex;
+            justify-content: center; align-items: center;
+        }
+
+        .scan-line {
+            width: 85%; height: 3px;
+            background: linear-gradient(90deg, rgba(57,255,20,0) 0%, var(--neon-green) 50%, rgba(57,255,20,0) 100%);
+            position: absolute; top: 10px; box-shadow: 0 0 10px var(--neon-green);
+            animation: scanAnim 2.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes scanAnim { from { top: 15px; } to { top: 130px; } }
+        .button-group { width: 100%; margin-top: auto; }
+
+        /* Buttons Design */
+        .btn-pro {
+            width: 100%; background-color: var(--neon-green);
+            color: #160036; border: none; padding: 14px 20px;
+            font-size: 12px; font-weight: 700; border-radius: 14px;
+            cursor: pointer; box-shadow: 0 4px 12px rgba(57, 255, 20, 0.15);
+            transition: all 0.2s ease; margin-bottom: 10px;
+            letter-spacing: 0.2px; box-sizing: border-box;
+        }
+        .btn-pro:hover { transform: translateY(-1px); box-shadow: 0 5px 15px rgba(57, 255, 20, 0.3); }
+
+        .btn-pro.btn-fail {
+            background-color: transparent; color: var(--neon-red);
+            border: 2px solid var(--neon-red); box-shadow: none;
+            margin-bottom: 0;
+        }
+        .btn-pro.btn-fail:hover { background-color: rgba(255, 49, 49, 0.08); }
+
+        .btn-pro.btn-secondary {
+            background-color: rgba(255,255,255,0.08); color: white;
+            box-shadow: none; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .btn-pro.btn-secondary:hover { background-color: rgba(255,255,255,0.15); }
+
+        /* Telemetry List */
+        .telemetry-list {
+            width: 100%; background: var(--glass-card);
+            padding: 16px; border-radius: 20px; box-sizing: border-box;
+            border: 1px solid var(--glass-border); backdrop-filter: blur(20px);
+            margin: auto 0;
+        }
+
+        .telemetry-item {
+            display: flex; justify-content: space-between;
+            align-items: center; margin: 14px 0; font-size: 13px;
+        }
+        .item-label { display: flex; align-items: center; gap: 8px; color: rgba(255, 255, 255, 0.85); }
+
+        .status-dot {
+            width: 7px; height: 7px; background-color: rgba(255,255,255,0.2);
+            border-radius: 50%; transition: background-color 0.3s ease;
+        }
+        .status-dot.active-check { background-color: #ffbc00; box-shadow: 0 0 6px #ffbc00; }
+        .status-dot.active-success { background-color: var(--neon-green); box-shadow: 0 0 6px var(--neon-green); }
+        .status-dot.active-error { background-color: var(--neon-red); box-shadow: 0 0 6px var(--neon-red); }
+
+        .status { 
+            font-weight: 700; color: rgba(255, 255, 255, 0.3); 
+            text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px;
+        }
+        .status.checking { color: #ffbc00; }
+        .status.success { color: var(--neon-green); }
+        .status.error { color: var(--neon-red); }
+
+        /* Results Screen */
+        .success-badge { font-size: 45px; margin-bottom: 5px; animation: pop 0.4s ease-out; }
+
+        .glow-handlebar {
+            width: 80px; height: 80px; background-color: #121214;
+            border-radius: 50%; display: flex; justify-content: center;
+            align-items: center; border: 3px solid rgba(255,255,255,0.1);
+            margin: 15px 0; box-shadow: inset 0 4px 10px rgba(0,0,0,0.8);
+        }
+
+        .neon-led {
+            width: 24px; height: 24px; background-color: var(--neon-green);
+            border-radius: 50%; box-shadow: 0 0 25px 10px var(--neon-green);
+            animation: pulse 1.2s infinite alternate ease-in-out;
+        }
+        .neon-led.red-alert {
+            background-color: var(--neon-red) !important;
+            box-shadow: 0 0 25px 10px var(--neon-red) !important;
+        }
+
+        @keyframes pulse { from { opacity: 0.5; transform: scale(0.95); } to { opacity: 1; transform: scale(1.05); } }
+        @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        <div id="push-cashback" class="push-notification">
+            <div class="push-icon-cash">💸</div>
+            <div style="text-align: left;">
+                <div style="font-size: 11px; font-weight: bold; color: #00C853;">InstaPay Alert</div>
+                <div style="font-size: 10px; color: #eee;">Received +15.00 EGP from Rabbit Pro-Zone Reward</div>
+            </div>
+        </div>
+
+        <div id="push-penalty" class="push-notification">
+            <div class="push-icon-penalty">⚠️</div>
+            <div style="text-align: left;">
+                <div style="font-size: 11px; font-weight: bold; color: var(--neon-red);">Wallet Deduction</div>
+                <div style="font-size: 10px; color: #eee;">Penalty -50.00 EGP applied for parking violation</div>
+            </div>
+        </div>
+
+        <div class="app-header">
+            <div class="client-logo"><img src="./rabbit-logo.webp" alt="Rabbit"></div>
+            <div class="campaign-logo"><img src="./pro-logo.jpeg" alt="Mobility Pro"></div>
+        </div>
+        <div class="team-tagline"></div>
+
+        <div id="screen-scan" class="screen">
+            <div class="screen-content">
+                <h3 style="margin: 0; font-size: 18px; font-weight: 700;">Start Your Ride</h3>
+                <p style="opacity: 0.6; font-size: 12px; margin: 4px 0 0 0;">Test automated telemetry scenarios</p>
+                <div class="scan-box">
+                    <div class="scan-line"></div>
+                    <span style="opacity: 0.3; font-size: 10px; font-weight: 600; letter-spacing: 0.5px;">IoT LINK ACTIVE</span>
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="btn-pro" onclick="startProCheck(true)">Simulate Successful Ride ✅</button>
+                <button class="btn-pro btn-fail" onclick="startProCheck(false)">Simulate Mechanical Issue ❌</button>
+            </div>
+        </div>
+
+        <div id="screen-checking" class="screen hidden">
+            <div class="screen-content" style="width:100%;">
+                <h4 id="checking-title" style="color: var(--neon-green); margin: 0 0 20px 0; font-size: 13px; font-weight: 700; letter-spacing: 0.3px;">RUNNING AUTOMATED SAFETY CHECK...</h4>
+                <div class="telemetry-list">
+                    <div class="telemetry-item">
+                        <div class="item-label"><div id="dot-brakes" class="status-dot"></div><span>Hydraulic Brake System</span></div>
+                        <span id="status-brakes" class="status">Pending</span>
+                    </div>
+                    <div class="telemetry-item">
+                        <div class="item-label"><div id="dot-battery" class="status-dot"></div><span>Battery Cells Status</span></div>
+                        <span id="status-battery" class="status">Pending</span>
+                    </div>
+                    <div class="telemetry-item">
+                        <div class="item-label"><div id="dot-iot" class="status-dot"></div><span>IoT Firmware Core</span></div>
+                        <span id="status-iot" class="status">Pending</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="screen-result" class="screen hidden">
+            <div class="screen-content">
+                <div id="result-badge" class="success-badge">✅</div>
+                <h2 id="result-title" style="color: var(--neon-green); margin: 0; font-size: 18px; font-weight: 700;">Verified Pro-Scooter</h2>
+                <p id="result-desc" style="color: rgba(255,255,255,0.8); font-size: 12px; padding: 0 5px; min-height: 55px; margin: 8px 0 0 0; line-height: 1.4;"></p>
+                <div class="glow-handlebar"><div id="neon-led-light" class="neon-led"></div></div>
+            </div>
+            
+            <div id="button-group-success" class="button-group hidden">
+                <button class="btn-pro" onclick="simulateParking(true)">End Ride & Park in green-Zone ✅</button>
+                <button class="btn-pro btn-secondary" onclick="simulateParking(false)">End Ride & Park Outside Zone ❌</button>
+            </div>
+            <div id="button-group-failure" class="button-group hidden">
+                <button class="btn-pro" style="background-color: var(--neon-green);" onclick="resetSimulator()">Scan Another Vehicle</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var isSuccessScenario = true;
+
+        function startProCheck(isSuccess) {
+            isSuccessScenario = isSuccess;
+            document.getElementById('push-cashback').classList.remove('show');
+            document.getElementById('push-penalty').classList.remove('show');
+            
+            var checkingTitle = document.getElementById('checking-title');
+            if (checkingTitle) {
+                checkingTitle.style.color = isSuccess ? 'var(--neon-green)' : '#ffbc00';
+                checkingTitle.innerText = isSuccess ? 'RUNNING AUTOMATED SAFETY CHECK...' : 'SECURITY PROTOCOL ENGAGED...';
+            }
+
+            document.getElementById('screen-scan').classList.add('hidden');
+            document.getElementById('screen-checking').classList.remove('hidden');
+
+            // --- Step 1: Brakes ---
+            setTimeout(function() {
+                var brakes = document.getElementById('status-brakes');
+                var dot = document.getElementById('dot-brakes');
+                brakes.innerText = 'Checking'; brakes.className = 'status checking'; dot.className = 'status-dot active-check';
+                setTimeout(function() {
+                    if (isSuccessScenario) {
+                        brakes.innerText = 'Verified ✓'; brakes.className = 'status success'; dot.className = 'status-dot active-success';
+                    } else {
+                        brakes.innerText = 'Failure ❌'; brakes.className = 'status error'; dot.className = 'status-dot active-error';
+                    }
+                }, 600);
+            }, 300);
+
+            // --- Step 2: Battery ---
+            setTimeout(function() {
+                var battery = document.getElementById('status-battery');
+                var dot = document.getElementById('dot-battery');
+                battery.innerText = 'Measuring'; battery.className = 'status checking'; dot.className = 'status-dot active-check';
+                setTimeout(function() {
+                    battery.className = 'status success'; dot.className = 'status-dot active-success';
+                    battery.innerText = isSuccessScenario ? '85% Safe ✓' : '94% Safe ✓';
+                }, 600);
+            }, 1100);
+
+            // --- Step 3: IoT ---
+            setTimeout(function() {
+                var iot = document.getElementById('status-iot');
+                var dot = document.getElementById('dot-iot');
+                iot.innerText = 'Syncing'; iot.className = 'status checking'; dot.className = 'status-dot active-check';
+                setTimeout(function() {
+                    iot.innerText = 'Connected ✓'; iot.className = 'status success'; dot.className = 'status-dot active-success';
+                    setTimeout(function() {
+                        document.getElementById('screen-checking').classList.add('hidden');
+                        renderFinalResult();
+                    }, 500);
+                }, 600);
+            }, 1900);
+        }
+
+        function renderFinalResult() {
+            document.getElementById('screen-result').classList.remove('hidden');
+            var groupSuccess = document.getElementById('button-group-success');
+            var groupFailure = document.getElementById('button-group-failure');
+            var led = document.getElementById('neon-led-light');
+            var title = document.getElementById('result-title');
+            var desc = document.getElementById('result-desc');
+            var badge = document.getElementById('result-badge');
+
+            if (isSuccessScenario) {
+                badge.innerText = '✅';
+                title.innerText = 'Verified Pro-Scooter';
+                title.style.color = 'var(--neon-green)';
+                desc.innerText = 'Telemetry check complete. Systems meet safety standards. Handlebar LED is now Green. Your ride is authorized.';
+                led.className = 'neon-led';
+                groupSuccess.classList.remove('hidden');
+                groupFailure.classList.add('hidden');
+            } else {
+                badge.innerText = '⚠️';
+                title.innerText = 'Access Denied';
+                title.style.color = 'var(--neon-red)';
+                desc.innerText = 'CRITICAL ERROR: Defect caught in Hydraulic Brake Alignment. Device locked automatically. Handlebar LED turned Red for your safety.';
+                led.className = 'neon-led red-alert';
+                groupSuccess.classList.add('hidden');
+                groupFailure.classList.remove('hidden');
+            }
+        }
+
+        function simulateParking(isCorrectParking) {
+            var badge = document.getElementById('result-badge');
+            var title = document.getElementById('result-title');
+            var desc = document.getElementById('result-desc');
+            var groupSuccess = document.getElementById('button-group-success');
+            var groupFailure = document.getElementById('button-group-failure');
+            var led = document.getElementById('neon-led-light');
+
+            groupSuccess.classList.add('hidden'); // Hide parking choice buttons during load
+            badge.innerText = '🔄';
+            title.innerText = 'Validating Parking...';
+            title.style.color = '#ffbc00';
+            desc.innerText = 'Analyzing smartphone GPS coordinates and bounding box boundaries...';
+
+            setTimeout(function() {
+                groupFailure.classList.remove('hidden'); // Show back button
+                
+                if (isCorrectParking) {
+                    badge.innerText = '🅿️';
+                    title.innerText = 'Pro-Zone Approved!';
+                    title.style.color = 'var(--neon-green)';
+                    desc.innerText = 'Perfectly aligned parking. Thank you for preserving Cairo\'s street order! Your cashback reward has been initiated.';
+                    document.getElementById('push-cashback').classList.add('show');
+                } else {
+                    badge.innerText = '❌';
+                    title.innerText = 'Parking Violation!';
+                    title.style.color = 'var(--neon-red)';
+                    desc.innerText = 'Violation Detected: You parked outside the designated Pro-Zone. Street mobility is blocked. A penalty fee has been charged to your wallet.';
+                    led.className = 'neon-led red-alert';
+                    document.getElementById('push-penalty').classList.add('show');
+                }
+            }, 2000);
+        }
+
+        function resetSimulator() {
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('screen-scan').classList.remove('hidden');
+            document.getElementById('push-cashback').classList.remove('show');
+            document.getElementById('push-penalty').classList.remove('show');
+            
+            var groupSuccess = document.getElementById('button-group-success');
+            var groupFailure = document.getElementById('button-group-failure');
+            groupSuccess.classList.add('hidden');
+            groupFailure.classList.add('hidden');
+
+            var statuses = document.querySelectorAll('.status');
+            var dots = document.querySelectorAll('.status-dot');
+            statuses.forEach(function(s) { s.innerText = 'Pending'; s.className = 'status'; });
+            dots.forEach(function(d) { d.className = 'status-dot'; });
+        }
+    </script>
+</body>
+</html>
+
+
+
+<!-- with one feature -->
+<!-- <!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rabbit Mobility - Pro-Check Simulator</title>
+    <style>
+        :root {
+            --purple-main: #240056; 
+            --purple-dark: #160036;
+            --neon-green: #39FF14;
+            --neon-red: #FF3131;
+            --dark-bg: #0A0A0C;
+            --glass-card: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100vh; /* Locked to viewport height */
             margin: 0;
             color: #FFFFFF;
@@ -478,4 +934,4 @@
         }
     </script>
 </body>
-</html>
+</html> -->
